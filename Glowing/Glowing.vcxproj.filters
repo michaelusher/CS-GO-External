@@ -23,5 +23,14 @@
     <ClInclude Include="Offsets.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="localPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="glowingEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
