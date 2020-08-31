@@ -149,6 +149,7 @@
     <ClInclude Include="Includes.h" />
     <ClInclude Include="localPlayer.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="passwordLogin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

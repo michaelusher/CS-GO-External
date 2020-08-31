@@ -13,13 +13,9 @@ int main() {
 	engineModule = GetModuleBaseAddress("engine.dll");
 	hdc = GetDC(hwnd);
 
-	for (int i = 0; i < 5; i++) {
-		std::cout << "...\n";
-		Sleep(100);
-	}
-	std::cout << "Hack Initiated";
+	login();
 	
-	while (!GetAsyncKeyState(VK_END)) {
+	while (!GetAsyncKeyState(VK_END) && verified == true) {
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 

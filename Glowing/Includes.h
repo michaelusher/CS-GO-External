@@ -4,4 +4,4 @@
 #include "Offsets.h"
 #include "localPlayer.h"
 #include "glowingEffect.h"
-#include "classID.cpp"
+#include "passwordLogin.h"
