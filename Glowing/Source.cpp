@@ -18,39 +18,31 @@ int main() {
 		Sleep(100);
 	}
 	std::cout << "Hack Initiated";
-	
+
 	while (!GetAsyncKeyState(VK_END)) {
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
-		for (auto i = 0u; i < GlowListSize; i++) {
+		for (auto i = 0u; i < GlowListSize; i++) { // checks the whole glow list 
 			uintptr_t playerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + i * 0x10);
 			uintptr_t nonPlayerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + i * 0x38);
 
 			int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
 			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
-			bool Dormant = RPM<bool>(playerEntity + m_bDormant); 
-			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
+			bool Dormant = RPM<bool>(playerEntity + m_bDormant); if (Dormant) continue;
+			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum); if (EnemyHealth < 1 || EnemyHealth > 100) continue;
 			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
-
-			if (Dormant) {
-				continue;
-			}
-
-			if (EnemyHealth < 1 || EnemyHealth > 100) {
-				continue;
-			}
 
 			radarAlwaysSeen(playerEntity);
 			bhopMechanic();
 			antiFlash();
-			triggerbot(playerEntity, localTeam);
+			triggerbot(playerEntity);
 
-			if (localTeam != EntityTeam) {
+			if (localTeam != EntityTeam) { // if the entity team is not on my team
 				colorRenderEnemy(playerEntity, EnemyHealth);
 				glowStructureEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 			}
-			else if (localTeam == EntityTeam) {
+			else if (localTeam == EntityTeam) { // of tje entity team is on my team
 				teamColorAndGlow(GlowManager, GlowIndex, playerEntity);
 			}
 		}

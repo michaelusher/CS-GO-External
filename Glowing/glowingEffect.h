@@ -26,12 +26,14 @@ struct ClrRender {
 void colorRenderEnemy(uintptr_t entity, short int health) {
 	ClrRender clrRenderEnemy;
 	
+	//enemy render color is based off of health
+
 	if (health < 80 && health > 20) {
 		clrRenderEnemy.red = 255;
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
 	}
-	else if (health < 30) {
+	else if (health <= 20) {
 		clrRenderEnemy.red = 255;
 		clrRenderEnemy.green = 0;
 		clrRenderEnemy.blue = 0;
@@ -50,12 +52,12 @@ void glowStructureEnemy(uintptr_t glowObjectManager, short int glowIndex, uintpt
 	ClrRender clrRenderEnemy;
 	short int diffusing = RPM<short int>(entity + m_bIsDefusing);
 
-	if (diffusing == false) {
+	if (diffusing == false) { // if not diffusing, enemy glow color will reflect health
 		EnemyGlow.red = health * -0.01 + 1;
 		EnemyGlow.green = health * 0.01;
 		EnemyGlow.blue = 0;
 	}
-	else {
+	else { // if diffusing, enemy glow is set to white
 		EnemyGlow.red = 1.f;
 		EnemyGlow.green = 1.f;
 		EnemyGlow.blue = 1.f;
@@ -68,10 +70,12 @@ void teamColorAndGlow(uintptr_t glowObjectManager, short int glowIndex, uintptr_
 	glowStructure TeamGlow;
 	ClrRender clrRenderTeam;
 	
+	// team glow is set to cyan
 	TeamGlow.red = 0.f;
 	TeamGlow.green = 1.f;
 	TeamGlow.blue = 1.f;
 
+	// team render color is set to cyan
 	clrRenderTeam.red = 0;
 	clrRenderTeam.green = 255;
 	clrRenderTeam.blue = 255;
