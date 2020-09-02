@@ -47,10 +47,9 @@ uintptr_t getLocalPlayer() {
 void bhopMechanic() {
 	BYTE Flag = RPM<BYTE>(getLocalPlayer() + m_fFlags);
 	if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
-		WPM<DWORD>(0x06, moduleBase + dwForceJump); // if the player is on the ground, then force jump to bhop
+		WPM<DWORD>(0x06, moduleBase + dwForceJump); // if the player is on the ground, then force jump to 
 	}
 }
-
 void antiFlash() {
 	bool noFlash = true;
 	if (noFlash) { // flash bang will not blind player 
@@ -68,8 +67,8 @@ void radarAlwaysSeen(uintptr_t entity) {
 
 void triggerbot(uintptr_t entity){
 	int id = RPM<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
-	if ((GetKeyState(VK_CAPITAL))) {
-		if ((id > 0 && id < 64)) { // if a player is in the crosshair of local player
+	if (GetKeyState(VK_CAPITAL)) {
+		if (id > 0 && id < 64) { // if a player is in the crosshair of local player
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); // left click simulated
 			Sleep(1);
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);

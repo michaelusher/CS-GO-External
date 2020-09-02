@@ -17,7 +17,12 @@ int main() {
 		std::cout << "...\n";
 		Sleep(100);
 	}
-	std::cout << "Hack Initiated";
+	std::cout << "Hack Initiated!\n\n";
+	std::cout << "Instructions\n";
+	std::cout << "1. Anti-Flash, Radar and Glow are always toggled on by default\n";
+	std::cout << "2. Hold the Spacebar to bhop\n";
+	std::cout << "3. Toggle on Caps Lock to enable the trigger bot\n";
+	std::cout << "4. Have Fun :)\n";
 
 	while (!GetAsyncKeyState(VK_END)) {
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
@@ -42,7 +47,7 @@ int main() {
 				colorRenderEnemy(playerEntity, EnemyHealth);
 				glowStructureEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 			}
-			else if (localTeam == EntityTeam) { // of tje entity team is on my team
+			else if (localTeam == EntityTeam) { // if the entity team is on my team
 				teamColorAndGlow(GlowManager, GlowIndex, playerEntity);
 			}
 		}
