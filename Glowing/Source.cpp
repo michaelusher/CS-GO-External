@@ -28,14 +28,23 @@ int main() {
 			uintptr_t nonPlayerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + i * 0x38);
 
 			int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
-			int EnemyHealth = RPM<int>(playerEntity + m_iHealth); if (EnemyHealth < 1 || EnemyHealth > 100) continue;
-			bool Dormant = RPM<bool>(playerEntity + m_bDormant); if (Dormant) continue;
+			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
+			bool Dormant = RPM<bool>(playerEntity + m_bDormant); 
 			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
 			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
+
+			if (Dormant) {
+				continue;
+			}
+
+			if (EnemyHealth < 1 || EnemyHealth > 100) {
+				continue;
+			}
 
 			radarAlwaysSeen(playerEntity);
 			bhopMechanic();
 			antiFlash();
+			triggerbot(playerEntity, localTeam);
 
 			if (localTeam != EntityTeam) {
 				colorRenderEnemy(playerEntity, EnemyHealth);

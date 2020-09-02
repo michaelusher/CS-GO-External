@@ -46,15 +46,15 @@ uintptr_t getLocalPlayer() {
 
 void bhopMechanic() {
 	BYTE Flag = RPM<BYTE>(getLocalPlayer() + m_fFlags);
-	if (GetKeyState(VK_CAPITAL) && Flag & (1 << 0)) { 
+	if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
 		WPM<DWORD>(0x06, moduleBase + dwForceJump);
 	}
 }
 
 void antiFlash() {
 	bool noFlash = true;
-	if (getLocalPlayer && noFlash) { //flash bang will not blind player 
-		long double duration = 0.001001;
+	if (noFlash) { //flash bang will not blind player 
+		long double duration = 0;
 		WPM<long double>(duration, getLocalPlayer() + m_flFlashDuration);
 	}
 }
@@ -63,5 +63,16 @@ void radarAlwaysSeen(uintptr_t entity) {
 	bool enemySeen = true;
 	if (getLocalPlayer && enemySeen) {
 		WPM<bool>(enemySeen, entity + m_bSpotted);
+	}
+}
+
+void triggerbot(uintptr_t entity, int team){
+	int id = RPM<int>(getLocalPlayer() + m_iCrosshairId);
+	if (GetKeyState(VK_CAPITAL)) {
+		if ((id > 0 && id < 64) && !team) {
+			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+			Sleep(100);
+			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+		}
 	}
 }
