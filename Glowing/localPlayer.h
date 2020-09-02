@@ -60,8 +60,8 @@ void antiFlash() {
 }
 
 void radarAlwaysSeen(uintptr_t entity) {
-	short int enemySeen = true;
+	bool enemySeen = true;
 	if (getLocalPlayer && enemySeen) {
-		WPM<short int>(enemySeen, entity + m_bSpotted);
+		WPM<bool>(enemySeen, entity + m_bSpotted);
 	}
 }

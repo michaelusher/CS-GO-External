@@ -13,9 +13,13 @@ int main() {
 	engineModule = GetModuleBaseAddress("engine.dll");
 	hdc = GetDC(hwnd);
 
-	login();
+	for (int i = 0; i < 5; i++) {
+		std::cout << "...\n";
+		Sleep(100);
+	}
+	std::cout << "Hack Initiated";
 	
-	while (!GetAsyncKeyState(VK_END) && verified == true) {
+	while (!GetAsyncKeyState(VK_END)) {
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
@@ -38,8 +42,7 @@ int main() {
 				glowStructureEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 			}
 			else if (localTeam == EntityTeam) {
-				colorRenderTeam(playerEntity);
-				glowStructureTeam(GlowManager, GlowIndex, playerEntity);
+				teamColorAndGlow(GlowManager, GlowIndex, playerEntity);
 			}
 		}
 	}
