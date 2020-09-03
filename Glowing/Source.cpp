@@ -6,12 +6,12 @@ using namespace hazedumper::signatures;
 using namespace hazedumper;
 
 int main() {
-	hwnd = FindWindowA(NULL, "Counter-Strike: Global Offensive");
-	GetWindowThreadProcessId(hwnd, & procId);
-	hProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL,  procId);
+	handleWindow = FindWindowA(NULL, "Counter-Strike: Global Offensive");
+	GetWindowThreadProcessId(handleWindow, & processId);
+	handleProcess = OpenProcess(PROCESS_ALL_ACCESS, NULL, processId);
 	moduleBase = GetModuleBaseAddress("client.dll");
 	engineModule = GetModuleBaseAddress("engine.dll");
-	hdc = GetDC(hwnd);
+	hdc = GetDC(handleWindow);
 
 	for (int i = 0; i < 5; i++) {
 		std::cout << "...\n";

@@ -26,19 +26,19 @@ struct ClrRender {
 void colorRenderEnemy(uintptr_t entity, short int health) {
 	ClrRender clrRenderEnemy;
 	
-	//enemy render color is based off of health
+	// enemy render color is based off of health
 
-	if (health < 80 && health > 20) {
+	if (health < 80 && health > 20) { // yellow render
 		clrRenderEnemy.red = 255;
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
 	}
-	else if (health <= 20) {
+	else if (health <= 20) { // red render
 		clrRenderEnemy.red = 255;
 		clrRenderEnemy.green = 0;
 		clrRenderEnemy.blue = 0;
 	}
-	else {
+	else { // green render
 		clrRenderEnemy.red = 0;
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
