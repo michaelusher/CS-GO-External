@@ -11,7 +11,7 @@ void printInstructions() {
 		std::cout << "...\n";
 		Sleep(100);
 	}
-	std::cout << "\nCOOL VIBES ONLY! (A Mediocre Closet Cheat)\n\n";
+	std::cout << "\nCOOL VIBES ONLY! (CVO)\n\n";
 	Sleep(100);
 	std::cout << "Instructions for\n";
 	Sleep(100);
@@ -57,10 +57,12 @@ int main() {
 			triggerbot(playerEntity);
 
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
-				glowStructureEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
+				glowEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
+				colorRenderEnemy(playerEntity, EnemyHealth);
 			}
 			else if (localTeam == EntityTeam) { // if the entity team is on my team
-				teamColorAndGlow(GlowManager, GlowIndex, playerEntity);
+				glowTeam(GlowManager, GlowIndex, playerEntity);
+				colorRenderTeam(playerEntity);
 			}
 		}
 	}

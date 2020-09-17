@@ -2,8 +2,8 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 #include "Offsets.h"
-#include "localPlayer.h"
+#include "externalFunctions.h"
 #include "glowingEffect.h"
 #include "hwidVerification.h"
-#include <tchar.h>
-#include <intrin.h>
+#include "localPlayer.h"
+#include "colorRenderEffect.h"

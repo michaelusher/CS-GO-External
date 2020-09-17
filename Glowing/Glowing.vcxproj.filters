@@ -23,9 +23,6 @@
     <ClInclude Include="Offsets.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="localPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="glowingEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,6 +30,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hwidVerification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="externalFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="localPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="colorRenderEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
