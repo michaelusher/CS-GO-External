@@ -66,6 +66,9 @@ void radarAlwaysSeen(uintptr_t entity) {
 }
 
 void triggerbot(uintptr_t entity) {
+	radarAlwaysSeen(entity);
+	antiFlash();
+	bhopMechanic();
 	int id = RPM<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
 	if (GetKeyState(VK_CAPITAL)) {
 		if (id > 0 && id < 64) { // if a player is in the crosshair of local player

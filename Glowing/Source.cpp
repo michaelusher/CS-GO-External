@@ -11,9 +11,9 @@ void printInstructions() {
 		std::cout << "...\n";
 		Sleep(100);
 	}
-	std::cout << "\nCOOL VIBES ONLY!\n\n";
+	std::cout << "\nCOOL VIBES ONLY! (A Mediocre Closet Cheat)\n\n";
 	Sleep(100);
-	std::cout << "Instructions\n";
+	std::cout << "Instructions for\n";
 	Sleep(100);
 	std::cout << "1. Anti-Flash, Radar and Glow are always toggled on by default.\n";
 	Sleep(100);
@@ -33,7 +33,6 @@ int main() {
 	hdc = GetDC(handleWindow);
 
 	printInstructions();
-
 	hwidChecker();
 
 	while (hwidChecker() == true) {
@@ -55,9 +54,6 @@ int main() {
 
 			if (Dormant) continue;
 
-			radarAlwaysSeen(playerEntity);
-			bhopMechanic();
-			antiFlash();
 			triggerbot(playerEntity);
 
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
