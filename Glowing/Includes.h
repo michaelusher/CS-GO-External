@@ -4,3 +4,6 @@
 #include "Offsets.h"
 #include "localPlayer.h"
 #include "glowingEffect.h"
+#include "hwidVerification.h"
+#include <tchar.h>
+#include <intrin.h>

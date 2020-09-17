@@ -5,6 +5,25 @@ using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
+void printInstructions() {
+	system("Color 0B");
+	for (int i = 0; i < 5; i++) {
+		std::cout << "...\n";
+		Sleep(100);
+	}
+	std::cout << "\nCOOL VIBES ONLY!\n\n";
+	Sleep(100);
+	std::cout << "Instructions\n";
+	Sleep(100);
+	std::cout << "1. Anti-Flash, Radar and Glow are always toggled on by default.\n";
+	Sleep(100);
+	std::cout << "2. Hold the Spacebar to bhop.\n";
+	Sleep(100);
+	std::cout << "3. Toggle on Caps Lock to enable the trigger bot.\n";
+	Sleep(100);
+	std::cout << "4. Have Fun! :)\n";
+}
+
 int main() {
 	handleWindow = FindWindowA(NULL, "Counter-Strike: Global Offensive");
 	GetWindowThreadProcessId(handleWindow, & processId);
@@ -13,18 +32,12 @@ int main() {
 	engineModule = GetModuleBaseAddress("engine.dll");
 	hdc = GetDC(handleWindow);
 
-	for (int i = 0; i < 5; i++) {
-		std::cout << "...\n";
-		Sleep(100);
-	}
-	std::cout << "Hack Initiated!\n\n";
-	std::cout << "Instructions\n";
-	std::cout << "1. Anti-Flash, Radar and Glow are always toggled on by default\n";
-	std::cout << "2. Hold the Spacebar to bhop\n";
-	std::cout << "3. Toggle on Caps Lock to enable the trigger bot\n";
-	std::cout << "4. Have Fun :)\n";
+	printInstructions();
 
-	while (!GetAsyncKeyState(VK_END)) {
+	hwidChecker();
+
+	while (hwidChecker() == true) {
+		
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
@@ -34,9 +47,13 @@ int main() {
 
 			int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
 			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
-			bool Dormant = RPM<bool>(playerEntity + m_bDormant); if (Dormant) continue;
-			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum); if (EnemyHealth < 1 || EnemyHealth > 100) continue;
+			
+			if (EnemyHealth < 1 || EnemyHealth > 100) continue;
+			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
 			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
+			bool Dormant = RPM<bool>(playerEntity + m_bDormant); 
+
+			if (Dormant) continue;
 
 			radarAlwaysSeen(playerEntity);
 			bhopMechanic();
@@ -44,7 +61,6 @@ int main() {
 			triggerbot(playerEntity);
 
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
-				colorRenderEnemy(playerEntity, EnemyHealth);
 				glowStructureEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 			}
 			else if (localTeam == EntityTeam) { // if the entity team is on my team

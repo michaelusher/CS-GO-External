@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glowingEffect.h" />
+    <ClInclude Include="hwidVerification.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="localPlayer.h" />
     <ClInclude Include="Offsets.h" />

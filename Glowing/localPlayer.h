@@ -49,22 +49,23 @@ void bhopMechanic() {
 		WPM<DWORD>(0x06, moduleBase + dwForceJump); // if the player is on the ground, then force jump to 
 	}
 }
+
 void antiFlash() {
 	bool noFlash = true;
 	if (noFlash) { // flash bang will not blind player 
-		long double duration = 0;
-		WPM<long double>(duration, getLocalPlayer() + m_flFlashDuration); // flash duration is consistenly set to 0
+		long double duration = 0.00;
+		WPM<long double>(duration, getLocalPlayer() + m_flFlashMaxAlpha); // flash duration is consistenly set to 0
 	}
 }
 
 void radarAlwaysSeen(uintptr_t entity) {
 	bool enemySeen = true;
-	if (getLocalPlayer && enemySeen) {
+	if (enemySeen) {
 		WPM<bool>(enemySeen, entity + m_bSpotted); // set radar to enemies are always seen
 	}
 }
 
-void triggerbot(uintptr_t entity){
+void triggerbot(uintptr_t entity) {
 	int id = RPM<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
 	if (GetKeyState(VK_CAPITAL)) {
 		if (id > 0 && id < 64) { // if a player is in the crosshair of local player
