@@ -19,11 +19,16 @@ struct glowStructure {
 	BYTE buffer[5];
 };
 
+void glowEnemyHealth(short int health) {
+	glowStructure EnemyGlowHealth;
+	EnemyGlowHealth.red = health * -0.01 + 1;
+	EnemyGlowHealth.green = health * 0.01;
+	EnemyGlowHealth.blue = 0;
+}
+
 void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, short int health) {
 	glowStructure EnemyGlow;
 	short int diffusing = RPM<short int>(entity + m_bIsDefusing);
-
-//	colorRenderEnemy(entity, health);
 
 	if (diffusing == false) { // if not diffusing, enemy glow color will reflect health
 		EnemyGlow.red = health * -0.01 + 1;
@@ -47,8 +52,4 @@ void glowTeam(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity
 	TeamGlow.blue = 1.f;
 
 	WPM<glowStructure>(TeamGlow, glowObjectManager + (glowIndex * 0x38) + 0x4);
-}
-
-void chickenGlow() {
-	glowStructure ChickenGlow;
 }

@@ -35,7 +35,7 @@ int main() {
 	printInstructions();
 	hwidChecker();
 
-	while (hwidChecker() == true) {
+	while (true) {
 		
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
@@ -46,11 +46,11 @@ int main() {
 
 			int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
 			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
-			
+
 			if (EnemyHealth < 1 || EnemyHealth > 100) continue;
 			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
 			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
-			bool Dormant = RPM<bool>(playerEntity + m_bDormant); 
+			bool Dormant = RPM<bool>(playerEntity + m_bDormant);
 
 			if (Dormant) continue;
 
