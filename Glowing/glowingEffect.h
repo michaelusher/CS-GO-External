@@ -28,19 +28,23 @@ void glowEnemyHealth(short int health) {
 
 void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, short int health) {
 	glowStructure EnemyGlow;
+	glowStructure EnemyGlowHealth;
 	short int diffusing = RPM<short int>(entity + m_bIsDefusing);
 
 	if (diffusing == false) { // if not diffusing, enemy glow color will reflect health
-		EnemyGlow.red = health * -0.01 + 1;
-		EnemyGlow.green = health * 0.01;
-		EnemyGlow.blue = 0;
+		EnemyGlowHealth.red = health * -0.01 + 1;
+		EnemyGlowHealth.green = health * 0.01;
+		EnemyGlowHealth.blue = 0;
+
+		WPM<glowStructure>(EnemyGlowHealth, glowObjectManager + (glowIndex * 0x38) + 0x4);
 	}
 	else { // if diffusing, enemy glow is set to white
 		EnemyGlow.red = 1.f;
 		EnemyGlow.green = 1.f;
 		EnemyGlow.blue = 1.f;
+
+		WPM<glowStructure>(EnemyGlow, glowObjectManager + (glowIndex * 0x38) + 0x4);
 	}
-	WPM<glowStructure>(EnemyGlow, glowObjectManager + (glowIndex * 0x38) + 0x4);
 }
 
 void glowTeam(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) {
