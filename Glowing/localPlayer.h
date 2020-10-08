@@ -6,7 +6,7 @@ void antiFlash() {
 	bool noFlash = true;
 	if (noFlash) { // flash bang will not blind player 
 		long double duration = 0.00;
-		WPM<long double>(duration, getLocalPlayer() + m_flFlashMaxAlpha); // flash duration is consistenly set to 0
+		WPM<long double>(getLocalPlayer() + m_flFlashMaxAlpha, duration); // flash duration is consistenly set to 0
 	}
 }
 
@@ -14,7 +14,7 @@ void bhopMechanic() {
 	antiFlash();
 	BYTE Flag = RPM<BYTE>(getLocalPlayer() + m_fFlags);
 	if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
-		WPM<DWORD>(0x06, moduleBase + dwForceJump); // if the player is on the ground, then force jump to 
+		WPM<DWORD>(moduleBase + dwForceJump, 0x06); // if the player is on the ground, then force jump to 
 	}
 }
 
@@ -22,7 +22,7 @@ void radarAlwaysSeen(uintptr_t entity) {
 	bhopMechanic();
 	bool enemySeen = true;
 	if (enemySeen) {
-		WPM<bool>(enemySeen, entity + m_bSpotted); // set radar to enemies are always seen
+		WPM<bool>(entity + m_bSpotted, enemySeen); // set radar to enemies are always seen
 	}
 }
 

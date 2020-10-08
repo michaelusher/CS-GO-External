@@ -5,7 +5,7 @@ using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
-struct glowStructure {
+struct glowStructure { // Source SDK
 	float red;
 	float green;
 	float blue;
@@ -19,13 +19,6 @@ struct glowStructure {
 	BYTE buffer[5];
 };
 
-void glowEnemyHealth(short int health) {
-	glowStructure EnemyGlowHealth;
-	EnemyGlowHealth.red = health * -0.01 + 1;
-	EnemyGlowHealth.green = health * 0.01;
-	EnemyGlowHealth.blue = 0;
-}
-
 void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, short int health) {
 	glowStructure EnemyGlow;
 	glowStructure EnemyGlowHealth;
@@ -36,24 +29,23 @@ void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entit
 		EnemyGlowHealth.green = health * 0.01;
 		EnemyGlowHealth.blue = 0;
 
-		WPM<glowStructure>(EnemyGlowHealth, glowObjectManager + (glowIndex * 0x38) + 0x4);
+		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
 	}
 	else { // if diffusing, enemy glow is set to white
 		EnemyGlow.red = 1.f;
 		EnemyGlow.green = 1.f;
 		EnemyGlow.blue = 1.f;
 
-		WPM<glowStructure>(EnemyGlow, glowObjectManager + (glowIndex * 0x38) + 0x4);
+		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlow);
 	}
 }
 
-void glowTeam(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) {
+void glowTeam(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) { // team glow is set to cyan
 	glowStructure TeamGlow;
 
-	// team glow is set to cyan
 	TeamGlow.red = 0.f;
 	TeamGlow.green = 1.f;
 	TeamGlow.blue = 1.f;
 
-	WPM<glowStructure>(TeamGlow, glowObjectManager + (glowIndex * 0x38) + 0x4);
+	WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, TeamGlow);
 }
