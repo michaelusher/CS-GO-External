@@ -1,5 +1,7 @@
 #pragma once
 
+extern bool rageStatus;
+
 using namespace hazedumper::netvars;
 using namespace hazedumper::signatures;
 
@@ -24,9 +26,7 @@ void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entit
 	glowStructure EnemyGlowHealth;
 	short int diffusing = RPM<short int>(entity + m_bIsDefusing);
 
-	bool healthGlow = false;
-
-	if (healthGlow == true) { // enemy glows based off of health
+	if (rageStatus == true) { // enemy glows based off of health
 		
 		EnemyGlowHealth.red = health * -0.01 + 1;
 		EnemyGlowHealth.green = health * 0.01;
@@ -34,7 +34,7 @@ void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entit
 
 		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
 	}
-	else if (healthGlow == false) { // enemy glows red
+	else if (rageStatus == false) { // enemy glows red
 		EnemyGlowHealth.red = 1;
 		EnemyGlowHealth.green = 0;
 		EnemyGlowHealth.blue = 0;

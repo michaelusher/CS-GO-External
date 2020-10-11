@@ -5,23 +5,39 @@ using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
+extern bool rageStatus;
+
 void printInstructions() {
 	system("Color 0B");
 	for (int i = 0; i < 5; i++) {
 		std::cout << "...\n";
 		Sleep(100);
 	}
-	std::cout << "\nCOOL VIBES ONLY! (CVO)\n\n";
+	std::cout << "\nCOOL VIBES ONLY! V2 (CVO)\n\n";
 	Sleep(100);
-	std::cout << "Instructions for\n";
+	std::cout << "Instructions\n";
 	Sleep(100);
-	std::cout << "1. Anti-Flash, Radar and Glow are always toggled on by default.\n";
+	std::cout << "*For the V2 version of CVO, there are two modes, rage and legit.\n";
 	Sleep(100);
-	std::cout << "2. Hold the Spacebar to bhop.\n";
+	std::cout << "*Legit mode allows for radar, basic walls, anti-flash and delayed triggerbot to be toggled on.\n";
 	Sleep(100);
-	std::cout << "3. Toggle on Caps Lock to enable the trigger bot.\n";
+	std::cout << "*Rage mode includes legit features plus bhop and health based glow and color render. \n*Also the triggerbot will not have a delay.\n";
 	Sleep(100);
-	std::cout << "4. Have Fun! :)\n";
+	std::cout << "*Toggle Caps-Lock for the triggerbot and hold spacebar to bunny hop.\n";
+	Sleep(100);
+	std::cout << "*Would you like to rage or play legit?\n";
+	
+	std::string input;
+	std::cin >> input;
+
+	if (input == "legit") {
+		std::cout << "Legit mode has been toggled. Have fun! :)";
+		rageStatus = false;
+	}
+	else if (input == "rage") {
+		std::cout << "Rage mode has been toggled. Have fun! :)";
+		rageStatus = true;
+	}
 }
 
 int main() {
