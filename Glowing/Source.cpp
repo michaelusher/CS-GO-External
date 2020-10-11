@@ -36,7 +36,6 @@ int main() {
 	hwidChecker();
 
 	while (hwidChecker()) {
-		
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
@@ -47,21 +46,22 @@ int main() {
 			int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
 			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
 
-			if (EnemyHealth < 1 || EnemyHealth > 100) 
+			if (EnemyHealth < 1 || EnemyHealth > 100) // checks if the enemy is alive
 				continue;
 
 			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
 			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
 			bool Dormant = RPM<bool>(playerEntity + m_bDormant);
 
-			if (Dormant)
+			if (Dormant) // dormant check
 				continue;
 
-			triggerbot(playerEntity);
-
+			triggerbot(localTeam);
+			bhopMechanic();
+		
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
-				glowEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 				colorRenderEnemy(playerEntity, EnemyHealth);
+				glowEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
 			}
 			else if (localTeam == EntityTeam) { // if the entity team is on my team
 				glowTeam(GlowManager, GlowIndex, playerEntity);

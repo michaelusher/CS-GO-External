@@ -11,8 +11,14 @@ struct ClrRender { // Source SDK
 
 void colorRenderEnemy(uintptr_t entity, short int health) { // enemy render color is based off of health
 	ClrRender clrRenderEnemy;
+	bool normalColors = true;
 
-	if (health < 80 && health > 20) { // yellow render
+	if (normalColors == true) {
+		clrRenderEnemy.red = 255;
+		clrRenderEnemy.green = 255;
+		clrRenderEnemy.blue = 255;
+	}
+	else if (health < 80 && health > 20) { // yellow render
 		clrRenderEnemy.red = 255;
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
@@ -32,10 +38,17 @@ void colorRenderEnemy(uintptr_t entity, short int health) { // enemy render colo
 
 void colorRenderTeam(uintptr_t entity) { // team render color is set to cyan
 	ClrRender clrRenderTeam;
+	bool normalColors = true;
 
-	clrRenderTeam.red = 0;
-	clrRenderTeam.green = 255;
-	clrRenderTeam.blue = 255;
-
+	if (normalColors == true) {
+		clrRenderTeam.red = 255;
+		clrRenderTeam.green = 255;
+		clrRenderTeam.blue = 255;
+	}
+	else {
+		clrRenderTeam.red = 0;
+		clrRenderTeam.green = 255;
+		clrRenderTeam.blue = 255;
+	}
 	WPM<ClrRender>(entity + m_clrRender, clrRenderTeam);
 }
