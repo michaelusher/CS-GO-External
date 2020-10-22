@@ -20,13 +20,16 @@ bool hwidChecker() {
 		fileSystemName,
 		ARRAYSIZE(fileSystemName))) {
 
-		if (serialNumber == 2106490509) { //my SN, c0mplex SN, Hallfic SN
+		if (serialNumber == 2106490509) { //my SN, c0mplex SN, Hallfic SN, condition SN
 			verified = true;
 		}
 		else if (serialNumber == 1755332032) {
 			verified = true;
 		}
 		else if(serialNumber == 813573350) {
+			verified = true;
+		}
+		else if (serialNumber == 918930106) {
 			verified = true;
 		}
 		else {

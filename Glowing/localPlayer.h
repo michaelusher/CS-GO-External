@@ -5,7 +5,7 @@ uintptr_t getLocalPlayer() {
 }
 
 void antiFlash() {
-	if (hwidChecker()) { // flash bang will not blind player 
+	if (rageStatus == true) { // flash bang will not blind player 
 		long double duration = 0.001;
 		WPM<long double>(getLocalPlayer() + m_flFlashMaxAlpha, duration); // flash duration is consistenly set to 0
 	}

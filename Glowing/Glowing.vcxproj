@@ -152,6 +152,10 @@
     <ClInclude Include="externalFunctions.h" />
     <ClInclude Include="localPlayer.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="resource1.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Michael\Desktop\alphaIcon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

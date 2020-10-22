@@ -5,12 +5,12 @@ using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
-struct ClrRender { // Source SDK
+struct ColorRender { // Source SDK
 	BYTE red, green, blue;
 };
 
 void colorRenderEnemy(uintptr_t entity, short int health) { // enemy render color is based off of health
-	ClrRender clrRenderEnemy;
+	ColorRender clrRenderEnemy;
 
 	if (rageStatus == false) {
 		clrRenderEnemy.red = 255;
@@ -32,11 +32,11 @@ void colorRenderEnemy(uintptr_t entity, short int health) { // enemy render colo
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
 	}
-	WPM<ClrRender>(entity + m_clrRender, clrRenderEnemy);
+	WPM<ColorRender>(entity + m_clrRender, clrRenderEnemy);
 }
 
 void colorRenderTeam(uintptr_t entity) { // team render color is set to cyan
-	ClrRender clrRenderTeam;
+	ColorRender clrRenderTeam;
 
 	if (rageStatus == false) {
 		clrRenderTeam.red = 255;
@@ -48,5 +48,5 @@ void colorRenderTeam(uintptr_t entity) { // team render color is set to cyan
 		clrRenderTeam.green = 255;
 		clrRenderTeam.blue = 255;
 	}
-	WPM<ClrRender>(entity + m_clrRender, clrRenderTeam);
+	WPM<ColorRender>(entity + m_clrRender, clrRenderTeam);
 }

@@ -7,6 +7,20 @@ using namespace hazedumper;
 
 extern bool rageStatus;
 
+void getInput() {
+	std::string input;
+	std::cin >> input;
+	
+	if (input == "legit") {
+		std::cout << "Legit mode has been toggled. Have fun! :)\n";
+		rageStatus = false;
+	}
+	else if (input == "rage") {
+		std::cout << "Rage mode has been toggled. Have fun! :)\n";
+		rageStatus = true;
+	}
+}
+
 void printInstructions() {
 	system("Color 0B");
 	for (int i = 0; i < 5; i++) {
@@ -19,25 +33,15 @@ void printInstructions() {
 	Sleep(100);
 	std::cout << "*For the V2 version of CVO, there are two modes, rage and legit.\n";
 	Sleep(100);
-	std::cout << "*Legit mode allows for radar, basic walls, anti-flash and delayed triggerbot to be toggled on.\n";
+	std::cout << "*Legit mode allows for radar, basic walls and delayed triggerbot to be toggled on.\n";
 	Sleep(100);
-	std::cout << "*Rage mode includes legit features plus bhop and health based glow and color render. \n*Also the triggerbot will not have a delay.\n";
+	std::cout << "*Rage mode includes legit features plus bhop, anti-flash and health based glow and color render. \n*Also the triggerbot will not have a delay.\n";
 	Sleep(100);
 	std::cout << "*Toggle Caps-Lock for the triggerbot and hold spacebar to bunny hop.\n";
 	Sleep(100);
 	std::cout << "*Would you like to rage or play legit?\n";
 	
-	std::string input;
-	std::cin >> input;
-
-	if (input == "legit") {
-		std::cout << "Legit mode has been toggled. Have fun! :)";
-		rageStatus = false;
-	}
-	else if (input == "rage") {
-		std::cout << "Rage mode has been toggled. Have fun! :)";
-		rageStatus = true;
-	}
+	getInput();
 }
 
 int main() {
@@ -52,6 +56,7 @@ int main() {
 	hwidChecker();
 
 	while (hwidChecker()) {
+
 		uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
@@ -74,7 +79,7 @@ int main() {
 
 			triggerbot(localTeam);
 			bhopMechanic();
-		
+
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
 				colorRenderEnemy(playerEntity, EnemyHealth);
 				glowEnemy(GlowManager, GlowIndex, playerEntity, EnemyHealth);
