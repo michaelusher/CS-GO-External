@@ -11,7 +11,7 @@ struct glowStructure { // Source SDK
 	float red;
 	float green;
 	float blue;
-	float alpha = 0.8;
+	float alpha = 1.f;
 	uint8_t padding[8];
 	float unknown = 1.f;
 	uint8_t padding2[4];

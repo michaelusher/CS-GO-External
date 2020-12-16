@@ -20,12 +20,15 @@ bool hwidChecker() {
 		fileSystemName,
 		ARRAYSIZE(fileSystemName))) {
 
-		if (serialNumber == 1234567890) {
+		if (serialNumber == 2106490509) {
+			verified = true;
+		}
+		else if (serialNumber == 813573350) {
 			verified = true;
 		}
 		else {
 			verified = false;
 		}
-		return verified;
 	}
+	return verified;
 }
