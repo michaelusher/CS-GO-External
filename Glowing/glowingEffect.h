@@ -24,7 +24,7 @@ struct glowStructure { // Source SDK
 void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, short int health) {
 	glowStructure EnemyGlow;
 	glowStructure EnemyGlowHealth;
-	short int diffusing = RPM<short int>(entity + m_bIsDefusing);
+	short int diffusing = ReadMem<short int>(entity + m_bIsDefusing);
 
 	if (rageStatus == true) { // enemy glows based off of health
 		
@@ -32,21 +32,21 @@ void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entit
 		EnemyGlowHealth.green = health * 0.01;
 		EnemyGlowHealth.blue = 0;
 
-		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
 	}
 	else if (rageStatus == false) { // enemy glows red
 		EnemyGlowHealth.red = 1;
 		EnemyGlowHealth.green = 0;
 		EnemyGlowHealth.blue = 0;
 
-		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
 	}
 	else if (diffusing == true){ // if diffusing, enemy glow is set to white
 		EnemyGlow.red = 1.f;
 		EnemyGlow.green = 1.f;
 		EnemyGlow.blue = 1.f;
 
-		WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlow);
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlow);
 	}
 }
 
@@ -57,5 +57,5 @@ void glowTeam(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity
 	TeamGlow.green = 1.f;
 	TeamGlow.blue = 1.f;
 
-	WPM<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, TeamGlow);
+	WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, TeamGlow);
 }

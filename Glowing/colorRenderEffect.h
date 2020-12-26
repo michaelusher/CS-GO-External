@@ -32,7 +32,7 @@ void colorRenderEnemy(uintptr_t entity, short int health) { // enemy render colo
 		clrRenderEnemy.green = 255;
 		clrRenderEnemy.blue = 0;
 	}
-	WPM<ColorRender>(entity + m_clrRender, clrRenderEnemy);
+	WriteMem<ColorRender>(entity + m_clrRender, clrRenderEnemy);
 }
 
 void colorRenderTeam(uintptr_t entity) { // team render color is set to cyan
@@ -48,5 +48,5 @@ void colorRenderTeam(uintptr_t entity) { // team render color is set to cyan
 		clrRenderTeam.green = 255;
 		clrRenderTeam.blue = 255;
 	}
-	WPM<ColorRender>(entity + m_clrRender, clrRenderTeam);
+	WriteMem<ColorRender>(entity + m_clrRender, clrRenderTeam);
 }

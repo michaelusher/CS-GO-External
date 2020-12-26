@@ -52,29 +52,24 @@ int main() {
 	hdc = GetDC(handleWindow);
 
 	while ((!GetAsyncKeyState(VK_END)) && (hwidChecker())) {
-
 		//uintptr_t GlowManager = RPM<uintptr_t>(moduleBase + dwGlowObjectManager);
-		const auto GlowListSize = RPM<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
+		const auto GlowListSize = ReadMem<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
-		for (uintptr_t i = 0u; i < GlowListSize; i++) { // checks the whole glow list 
-			uintptr_t playerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + i * 0x10);
-			//uintptr_t nonPlayerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + i * 0x38);
-
-			////int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
-			//int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
-			////int localPlayerHealth = RPM<int>(getLocalPlayer() + m_iHealth);
-			//if (EnemyHealth < 1 || EnemyHealth > 100) // checks if the enemy is alive
-			//	continue;
-			/*int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
-			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);*/
-			//bool Dormant = RPM<bool>(playerEntity + m_bDormant);
-			//if (Dormant) // dormant check
-			//	continue;
-
-			radarAlwaysSeen(playerEntity);
+		for (auto glowableEntity = 0u; glowableEntity < GlowListSize; glowableEntity++) { // checks the whole glow list 
+			uintptr_t playerEntity = ReadMem<uintptr_t>(moduleBase + dwEntityList + glowableEntity * 0x10);
+			//uintptr_t nonPlayerEntity = RPM<uintptr_t>(moduleBase + dwEntityList + glowableEntity * 0x38);
+			/*int GlowIndex = RPM<int>(playerEntity + m_iGlowIndex);
+			int EnemyHealth = RPM<int>(playerEntity + m_iHealth);
+			int localPlayerHealth = RPM<int>(getLocalPlayer() + m_iHealth);
+			if (EnemyHealth < 1 || EnemyHealth > 100) 
+				continue;
+			int EntityTeam = RPM<int>(playerEntity + m_iTeamNum);
+			int localTeam = RPM<int>(getLocalPlayer() + m_iTeamNum);
+			bool Dormant = RPM<bool>(playerEntity + m_bDormant);
+			if (Dormant) 
+				continue;*/
 			
-			//antiFlash();
-			triggerbot(playerEntity);
+			radarAlwaysSeen(playerEntity);
 			//if (localPlayerHealth >= 1 && localPlayerHealth <= 100) {
 			//	thirdPerson();
 			//}

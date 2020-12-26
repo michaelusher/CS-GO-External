@@ -31,12 +31,12 @@ uintptr_t GetModuleBaseAddress(const char* moduleName) {
 	}
 }
 
-template<typename T> T RPM(SIZE_T address) { // read process memory
+template<typename T> T ReadMem(SIZE_T address) { // read process memory
 	T buffer;
 	ReadProcessMemory(handleProcess, (LPCVOID)address, &buffer, sizeof(T), NULL);
 	return buffer;
 }
 
-template<typename T> void WPM(SIZE_T address, T buffer) { // write process memory
+template<typename T> void WriteMem(SIZE_T address, T buffer) { // write process memory
 	WriteProcessMemory(handleProcess, (LPVOID)address, &buffer, sizeof(buffer), NULL);
 }
