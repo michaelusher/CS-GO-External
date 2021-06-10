@@ -11,7 +11,7 @@ struct glowStructure { // Source SDK
 	float red;
 	float green;
 	float blue;
-	float alpha = 1.f;
+	float alpha;
 	uint8_t padding[8];
 	float unknown = 1.f;
 	uint8_t padding2[4];
@@ -19,34 +19,47 @@ struct glowStructure { // Source SDK
 	BYTE renderUnoccluded = false;
 	BYTE fullBloom = false;
 	BYTE buffer[5];
+	int glowSyle;
 };
 
-void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, short int health) {
-	glowStructure EnemyGlow;
-	glowStructure EnemyGlowHealth;
-	short int diffusing = ReadMem<short int>(entity + m_bIsDefusing);
+void basicGlowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) {
+	glowStructure EnemyOutline;
 
+	EnemyOutline.red = 0;
+	EnemyOutline.green = 1;
+	EnemyOutline.blue = 1;
+	EnemyOutline.alpha = 0.4f;
+	EnemyOutline.glowSyle = 0;
+
+	WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
+}
+
+void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, int health) {
+	glowStructure EnemyOutline;
+	glowStructure EnemyOutlineHealth;
+	short int diffusing = ReadMem<short int>(entity + m_bIsDefusing);
+	
 	if (rageStatus == true) { // enemy glows based off of health
 		
-		EnemyGlowHealth.red = health * -0.01 + 1;
-		EnemyGlowHealth.green = health * 0.01;
-		EnemyGlowHealth.blue = 0;
+		EnemyOutlineHealth.red = health * -0.01 + 1;
+		EnemyOutlineHealth.green = health * 0.01;
+		EnemyOutlineHealth.blue = 0;
 
-		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutlineHealth);
 	}
-	else if (rageStatus == false) { // enemy glows red
-		EnemyGlowHealth.red = 1;
-		EnemyGlowHealth.green = 0;
-		EnemyGlowHealth.blue = 0;
-
-		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlowHealth);
+	else if (rageStatus == false) { //enemy glows cyan
+		EnemyOutlineHealth.red = 0;
+		EnemyOutlineHealth.green = 1;
+		EnemyOutlineHealth.blue = 1;
+		EnemyOutlineHealth.glowSyle = 0;
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutlineHealth);
 	}
 	else if (diffusing == true){ // if diffusing, enemy glow is set to white
-		EnemyGlow.red = 1.f;
-		EnemyGlow.green = 1.f;
-		EnemyGlow.blue = 1.f;
+		EnemyOutline.red = 1.f;
+		EnemyOutline.green = 1.f;
+		EnemyOutline.blue = 1.f;
 
-		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyGlow);
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
 	}
 }
 

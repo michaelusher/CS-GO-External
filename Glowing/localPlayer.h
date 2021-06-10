@@ -4,15 +4,16 @@ uintptr_t getLocalPlayer() {
 	return ReadMem<uintptr_t>(moduleBase + dwLocalPlayer);
 }
 
-void antiFlash() {
-	if (hwidChecker() != false) { // flash bang will not blind player 
-		long double duration = 0.001;
-		WriteMem<long double>(getLocalPlayer() + m_flFlashMaxAlpha, duration); // flash duration is consistenly set to 0
-	}
+void radarAlwaysSeen(uintptr_t entity) {
+	WriteMem<bool>(entity + m_bSpotted, true); // set radar to enemies are always seen
+}
+
+void antiFlash() {  // flash bang will not blind player 
+	long double duration = 0.001;
+	WriteMem<long double>(getLocalPlayer() + m_flFlashMaxAlpha, duration); // flash duration is consistenly set to 0
 }
 
 void bhopMechanic() {
-	antiFlash();
 	BYTE Flag = ReadMem<BYTE>(getLocalPlayer() + m_fFlags);
 	if (rageStatus == true) {
 		if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
@@ -21,21 +22,15 @@ void bhopMechanic() {
 	}
 }
 
-void radarAlwaysSeen(uintptr_t entity) {
-	if(hwidChecker() == true)
-		if(GetKeyState(VK_CAPITAL))
-			WriteMem<bool>(entity + m_bSpotted, true); // set radar to enemies are always seen
-}
-
-void wideFOV() { //wide fov cheat time
+void wideFOV() { //wide fov cheat
 	int normalFOV = 90;
 	int wideFOV = 110;
 	if (rageStatus == true) {
 		if (GetAsyncKeyState(VK_F1)) {
-			WriteMem<int>(getLocalPlayer() + m_iFOV, normalFOV);
+			//WriteMem<int>(getLocalPlayer() + m_iFOV, normalFOV);
 		}
 		else if (GetAsyncKeyState(VK_F2)) {
-			WriteMem<int>(getLocalPlayer() + m_iFOV, wideFOV);
+			//WriteMem<int>(getLocalPlayer() + m_iFOV, wideFOV);
 		}
 	}
 }
@@ -55,7 +50,7 @@ void thirdPerson() { // third person mode will be toggled on if the alt key is p
 	if (rageStatus == true) {
 		if (GetKeyState(VK_MENU)) {
 			WriteMem<int>(getLocalPlayer() + m_iObserverMode, 1); // when in thrid person, fov will be wide
-			WriteMem<int>(getLocalPlayer() + m_iFOV, 110);
+			//WriteMem<int>(getLocalPlayer() + m_iFOV, 110);
 		}
 		else {
 			WriteMem<int>(getLocalPlayer() + m_iObserverMode, 0);
@@ -69,15 +64,11 @@ void shoot() {
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 }
 
-void actualTriggerbot() {
-	int id = ReadMem<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
+void triggerBot(int team, int health) {
 	if (GetKeyState(VK_CAPITAL)) {
-		if ((id > 0 && id < 64)) // if a player is in the crosshair of local player
-			Sleep(202);
+		int id = ReadMem<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
+		if ((id > 0 && id <= 64) && (health > 0)) // if a player is in the crosshair of local player
+			Sleep(170);
 			shoot();
 	}
-}
-
-void triggerbot() {
-	actualTriggerbot();
 }

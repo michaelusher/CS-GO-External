@@ -20,10 +20,7 @@ bool hwidChecker() {
 		fileSystemName,
 		ARRAYSIZE(fileSystemName))) {
 
-		if (serialNumber == 2106490509) {
-			verified = true;
-		}
-		else if (serialNumber == 813573350) {
+		if (serialNumber == 2460684972 || serialNumber == 309480728) { // HWID, mine, pyr0
 			verified = true;
 		}
 		else {
