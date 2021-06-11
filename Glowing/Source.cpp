@@ -48,7 +48,7 @@ int main() {
 		isRunning = false;
 		std::cout << "CANT FIND CSGO";
 		Sleep(5000);
-		ShowWindow(GetConsoleWindow(), SW_HIDE);
+		ShowWindow(GetConsoleWindow(), SW_HIDE); 
 	}
 	else {
 		isRunning = true;
