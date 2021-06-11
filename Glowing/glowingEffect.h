@@ -22,22 +22,33 @@ struct glowStructure { // Source SDK
 	int glowSyle;
 };
 
-void basicGlowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) {
+void basicGlowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity) { // if diffusing then the enemy glows white, otherwise the enemy glows cyan
 	glowStructure EnemyOutline;
+	short int diffusing = ReadMem<short int>(entity + m_bIsDefusing);
 
-	EnemyOutline.red = 0;
-	EnemyOutline.green = 1;
-	EnemyOutline.blue = 1;
-	EnemyOutline.alpha = 0.4f;
-	EnemyOutline.glowSyle = 0;
+	if (diffusing == true) { // if diffusing, enemy glow is set to white
 
-	WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
+		EnemyOutline.red = 1.f;
+		EnemyOutline.green = 1.f;
+		EnemyOutline.blue = 1.f;
+		EnemyOutline.alpha = 0.4f;
+		EnemyOutline.glowSyle = 0;
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
+	}
+	else {
+		EnemyOutline.red = 0;
+		EnemyOutline.green = 1;
+		EnemyOutline.blue = 1;
+		EnemyOutline.alpha = 0.4f;
+		EnemyOutline.glowSyle = 0;
+
+		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
+	}
 }
 
 void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entity, int health) {
 	glowStructure EnemyOutline;
 	glowStructure EnemyOutlineHealth;
-	short int diffusing = ReadMem<short int>(entity + m_bIsDefusing);
 	
 	if (rageStatus == true) { // enemy glows based off of health
 		
@@ -53,13 +64,6 @@ void glowEnemy(uintptr_t glowObjectManager, short int glowIndex, uintptr_t entit
 		EnemyOutlineHealth.blue = 1;
 		EnemyOutlineHealth.glowSyle = 0;
 		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutlineHealth);
-	}
-	else if (diffusing == true){ // if diffusing, enemy glow is set to white
-		EnemyOutline.red = 1.f;
-		EnemyOutline.green = 1.f;
-		EnemyOutline.blue = 1.f;
-
-		WriteMem<glowStructure>(glowObjectManager + (glowIndex * 0x38) + 0x4, EnemyOutline);
 	}
 }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <TlHelp32.h>
+#include <stdlib.h>
 #include "Offsets.h"
 #include "externalFunctions.h"
 #include "glowingEffect.h"

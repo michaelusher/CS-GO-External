@@ -15,10 +15,8 @@ void antiFlash() {  // flash bang will not blind player
 
 void bhopMechanic() {
 	BYTE Flag = ReadMem<BYTE>(getLocalPlayer() + m_fFlags);
-	if (rageStatus == true) {
-		if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
-			WriteMem<DWORD>(moduleBase + dwForceJump, 0x06); // if the player is on the ground, then force jump to 
-		}
+	if (GetAsyncKeyState(VK_SPACE) && Flag & (1 << 0)) {
+		WriteMem<DWORD>(moduleBase + dwForceJump, 0x06); // if the player is on the ground, then force jump to 
 	}
 }
 
@@ -64,10 +62,10 @@ void shoot() {
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 }
 
-void triggerBot(int team, int health) {
+void triggerBot(int health) {
 	if (GetKeyState(VK_CAPITAL)) {
 		int id = ReadMem<int>(getLocalPlayer() + m_iCrosshairId); // id of all players
-		if ((id > 0 && id <= 64) && (health > 0)) // if a player is in the crosshair of local player
+		if ((health > 0)) // if a player is in the crosshair of local player
 			Sleep(170);
 			shoot();
 	}

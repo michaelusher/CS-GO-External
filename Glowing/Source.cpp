@@ -1,25 +1,12 @@
 #include "Includes.h"
 
+
 using namespace hazedumper::netvars;
 using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
-extern bool rageStatus;
 
-void getInput() {
-	std::string input;
-	std::cin >> input;
-
-	if (input == "legit") {
-		std::cout << "Legit mode has been toggled. Have fun! :)\n";
-		rageStatus = false;
-	}
-	else if (input == "rage") {
-		std::cout << "Rage mode has been toggled. Have fun! :)\n";
-		rageStatus = true;
-	}
-}
 void printInstructions() {
 	system("Color 0B");
 
@@ -27,21 +14,12 @@ void printInstructions() {
 	Sleep(100);
 	std::cout << "Instructions\n";
 	Sleep(100);
+	std::cout << "*Enemies will glow cyan.\n";
+	Sleep(100);
+	std::cout << "*Anti-Flash and Radar are toggled on.\n";
+	Sleep(100);
 	std::cout << "*To toggle bunnyhop, hold spacebar.\n";
-	Sleep(100);
-	std::cout << "*To toggle triggerbot, press caps lock.\n";
-	Sleep(100);
-	std::cout << "*To toggle third person, press left-alt.\n";
-	Sleep(100);
-	std::cout << "*To toggle wide FOV, press F1\n";
-	Sleep(100);
-	std::cout << "*To toggle normal FOV, press F2\n";
-	Sleep(100);
-	std::cout << "*To toggle no-scope obstruction, press F3.\n";
-	Sleep(100);
-	std::cout << "*To toggle scope obstruction, press F4.\n";
-	Sleep(100);
-	rageStatus = true;
+	Sleep(5000);
 }
 
 int main() {
@@ -51,9 +29,33 @@ int main() {
 	moduleBase = GetModuleBaseAddress("client.dll");
 	hdc = GetDC(handleWindow);
 
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
+	printInstructions();
 
-	while ((!GetAsyncKeyState(VK_END)) && (hwidChecker())) {
+	if (hwidChecker() == true) {
+		std::cout << "HWID verified";
+		Sleep(3000);
+		std::cout << "I will go now. GLHF!";
+	}
+	else{
+		std::cout << "HWID not verified";
+		Sleep(10000);
+		return 0;
+	}
+
+	bool isRunning;
+	if ((FindWindowA(NULL, "Counter-Strike: Global Offensive")) == NULL) { // checks if CS:GO is Running
+		isRunning = false;
+		std::cout << "CANT FIND CSGO";
+		Sleep(5000);
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
+	}
+	else {
+		isRunning = true;
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
+	}
+
+	while (isRunning == true) {
 		uintptr_t GlowManager = ReadMem<uintptr_t>(moduleBase + dwGlowObjectManager);
 		const auto GlowListSize = ReadMem<uintptr_t>(moduleBase + dwGlowObjectManager + 0xC);
 
@@ -74,6 +76,9 @@ int main() {
 
 			if (Dormant)
 				continue;
+
+			bhopMechanic();
+			antiFlash();
 
 			if (localTeam != EntityTeam) { // if the entity team is not on my team
 				radarAlwaysSeen(playerEntity);
