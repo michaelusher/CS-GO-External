@@ -20,7 +20,7 @@ bool hwidChecker() {
 		fileSystemName,
 		ARRAYSIZE(fileSystemName))) {
 
-		if (serialNumber == 2460684972 || serialNumber == 309480728) { // my HWID, pyr0's HWID
+		if (serialNumber == 2460684972) { // if the drive's serial number is the same as my HWID, return true
 			verified = true;
 		}
 		else {

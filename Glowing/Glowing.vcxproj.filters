@@ -38,16 +38,5 @@
     <ClInclude Include="localPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="colorRenderEffect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Text.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

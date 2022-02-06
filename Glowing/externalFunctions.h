@@ -5,7 +5,7 @@ using namespace hazedumper::signatures;
 
 using namespace hazedumper;
 
-// windows API functions for finding the ModuleBaseAddress, RPM and WPM
+// windows API functions for finding the ModuleBaseAddress, ReadProcessMemory and WriteProcessMemory
 
 HWND handleWindow;
 DWORD processId;

@@ -7,4 +7,3 @@
 #include "glowingEffect.h"
 #include "hwidVerification.h"
 #include "localPlayer.h"
-#include "colorRenderEffect.h"
