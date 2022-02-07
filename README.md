@@ -1,5 +1,10 @@
 # CS-GO-External
 
-CS-GO-External has been designed to be used for educational purposes in regards to exploiting and manipulating game memory. CS-GO-External is not intended to be used in any online matches and by using this software, you agree to being responsible for your own actions and you are at risk of recieving any variation of a game ban. Remember to disable any anti-cheats, such as VAC (Valve Anti-Cheat) before running this software. Windows API functions are implemented including GetModuleBaseAddress(), ReadProcessMemory() and WriteProcessMemory().
+A major flaw in the video game industry is how video games are vulnerable to being modified through memory manipulation. Memory manipulation posees a threat to competitive online gaming because it allows for users to position themselves at an unfair advantage, violating the integrity of having a fair competitive environment. CS-GO-External has been designed to show how memory may be exploited and manipulated in Counter-Strike:Global Offensive. CS-GO-External has been developed for the sole intention of educational purposes. CS-GO-External is not intended to be used in any online matches and by using this software, you agree to being responsible for your own actions and you are at risk of recieving any variation of a game ban. Remember to disable any anti-cheats, such as VAC (Valve Anti-Cheat) before running this software. 
 
-If the program does not run, one common error could be that the offsets are not up to date. Make sure the offsets are up to date before running CS-GO-External.
+CS-GO-External uses Windows API functions such as including GetModuleBaseAddress(), ReadProcessMemory() and WriteProcessMemory().
+
+# Installation and Common Errors
+Make sure to update the addresses and offset.
+Set the character set to Multi-Byte.
+Build the application as x86 and run as an administrator.
