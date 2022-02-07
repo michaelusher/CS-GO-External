@@ -8,3 +8,4 @@ CS-GO-External uses Windows API functions such as including GetModuleBaseAddress
 Make sure to update the addresses and offset.
 Set the character set to Multi-Byte.
 Build the application as x86 and run as an administrator.
+Make sure to retrieve your HWID via the HWID checker and implement it into the CS-GO-External.
